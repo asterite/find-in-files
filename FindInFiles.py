@@ -217,7 +217,7 @@ class ResultsView(gtk.VBox):
             
             if (len(pieces) == 3):
                 line_number = pieces[1]
-                filename = os.path.basename(pieces[0]) # We just want the filename, not the path
+                filename = os.path.relpath(pieces[0],location) # We want the relative path
                 string = pieces[2].lstrip(" ") # Remove leading whitespace
 
                 # If we want to ignore comments, then we'll make sure it doesn't start with # or // or other common comment patterns. In the future it would be great to do this in context to the file type
