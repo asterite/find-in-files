@@ -137,7 +137,7 @@ class ResultsView(gtk.VBox):
             # If we don't find it, we'll create it in a new tab afterwards.
             for each in documents:
             
-                if (each.get_uri().replace("file://", "") == absolute_path):
+                if (each.get_uri() != None and each.get_uri().replace("file://", "") == absolute_path):
                     # This sets the active tab to "each"
                     self.geditwindow.set_active_tab(gedit.tab_get_from_document(each))
                     each.goto_line(line_number)
@@ -160,13 +160,6 @@ class ResultsView(gtk.VBox):
     # This function, of course, searches each open document for the search query and
     # displays the results in the side panel.
     def button_press(self, widget):
-        # Get all open tabs
-        documents = self.geditwindow.get_documents()
-        
-        # Make sure there are documents to search...
-        if (len(documents) == 0):
-            return # Can't search nothing.  :P
-            
         # Let's also make sure the user entered a search string
         if (len(self.search_form.get_text()) <= 0):
             return
