@@ -141,14 +141,9 @@ class ResultsView(gtk.VBox):
                     # This sets the active tab to "each"
                     self.geditwindow.set_active_tab(gedit.tab_get_from_document(each))
                     each.goto_line(line_number)
-
-                    # Get the bounds of the document                        
-                    (start, end) = each.get_bounds()
-                    
-                    self.geditwindow.get_active_view().scroll_to_iter(end, 0.0)
                     
                     x = each.get_iter_at_line_offset(line_number, 0)
-                    self.geditwindow.get_active_view().scroll_to_iter(x, 0.0)
+                    self.geditwindow.get_active_view().scroll_to_iter(x, 0.0, True)
                     
                     return
                     
